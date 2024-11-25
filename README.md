@@ -3,5 +3,11 @@
 - `npm install rippleui`
 - `module.exports = { plugins: [require("rippleui")], }`
 - `npm i drizzle-orm @neondatabase/serverless dotenv`
+- `npm i -D drizzle-kit`
+- `npx drizzle-kit push`
+- `npx drizzle-kit studio`
+- ``
+- ``
+- ``
 - ``
 - ``
