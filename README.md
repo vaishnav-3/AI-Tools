@@ -1,2 +1,9 @@
-# ai-lms
- 
+- `npx create-next-app@latest`
+- `npm install`
+- `npx shadcn@latest init`
+- `npx shadcn@latest add button`
+- `npm install rippleui`
+- `module.exports = { plugins: [require("rippleui")], }`
+- ``
+- ``
+- ``
