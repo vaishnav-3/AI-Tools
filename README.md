@@ -6,7 +6,7 @@
 - `npm i -D drizzle-kit`
 - `npx drizzle-kit push`
 - `npx drizzle-kit studio`
-- ``
+- `npm install @clerk/nextjs`
 - ``
 - ``
 - ``
