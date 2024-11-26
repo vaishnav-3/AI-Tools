@@ -16,7 +16,7 @@ export const CreateNewUser = inngest.createFunction(
     {event:'user.create'},
     async({ event, step }) => {
         const [user] = event.data
-        const result = await step.run('Check User and Create New if not in db', async ()=>{
+        const result = await step.run('Check User and create New if Not in DB', async ()=>{
             const result = await db
               .select()
               .from(USER_TABLE)
@@ -34,7 +34,6 @@ export const CreateNewUser = inngest.createFunction(
                 })
                 .returning({ id: USER_TABLE.id });
                 return userResp
-              console.log(userResp);
             }
             return result
         })
