@@ -3,6 +3,7 @@ import React from 'react'
 import Dashboard from '../page';
 import { LayoutDashboard, UserCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 
 function SideBar() {
@@ -29,7 +30,9 @@ function SideBar() {
         <h2 className="font-bold text-2xl">Ai LMS</h2>
       </div>
       <div className="mt-10">
-        <button className="btn btn-outline-primary w-full">+ Create New</button>
+        <Link href='/create' className='w-full'>
+            <button className="btn btn-outline-primary w-full">+ Create New</button>
+        </Link>
         <div className='mt-5'>
           {MenuList.map((menu, index) => (
             <div key={index} className={`flex gap-5 items-center p-3 hover:bg-gray-300 rounded-lg cursor-pointer mt-3 ${path==menu.path&&'bg-gray-300'}`}>
