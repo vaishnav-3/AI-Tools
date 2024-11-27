@@ -43,7 +43,7 @@ function Course() {
       <DashboardHeader />
       <div className="mx-10 md:mx-36 lg:px-60 mt-10">
         <CourseIntroCard course={courseData} />
-        <StudyMaterialSection />
+        <StudyMaterialSection courseId={courseId} />
         <ChapterList course={courseData} />
       </div>
     </div>
