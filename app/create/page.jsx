@@ -5,10 +5,14 @@ import TopicInput from './_components/TopicInput';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { useUser } from '@clerk/nextjs';
+import { Loader } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 function Create() {
     const [step, setStep] = useState(0);
     const [formData, setFormData] = useState([])
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
     const {user}=useUser();
     const handleUserInput=(fieldName, fieldValue)=>{
         setFormData(prev=>({
@@ -23,6 +27,7 @@ function Create() {
     const GenerateCourseOutline = async () => {
       try {
         const courseId = uuidv4();
+        setLoading(true);
         const payload = {
           courseId,
           courseType: formData.studyType,
@@ -38,7 +43,9 @@ function Create() {
           payload
         );
 
-        console.log("API Response:", result.data);
+        console.log("API Response:", result.data.result.resp);
+        setLoading(false);
+        router.replace('/dashboard')
       } catch (error) {
         console.error(
           "Error generating course outline:",
@@ -57,7 +64,7 @@ function Create() {
         </div>
         <div className="flex justify-between w-full mt-32">
         {step!=0? <button className="btn btn-primary" onClick={()=>setStep(step-1)}>Previous</button>:'-'}
-        {step==0? <button onClick={()=>setStep(step+1)} className="btn btn-outline-primary">Next</button> : <button className="btn btn-outline-primary" onClick={GenerateCourseOutline}>Generate</button>}
+        {step==0? <button onClick={()=>setStep(step+1)} className="btn btn-outline-primary">Next</button> : <button className="btn btn-outline-primary" onClick={GenerateCourseOutline} disabled={loading}>{loading?<Loader className='animate-spin'/>:"Generate"}</button>}
       </div>
     </div>
   )

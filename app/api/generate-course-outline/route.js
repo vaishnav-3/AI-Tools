@@ -33,7 +33,7 @@ export async function POST(req) {
         topic: topic,
         courseLayout: aiResult,
       })
-      .returning(STUDY_MATERIAL_TABLE);
+      .returning({resp:STUDY_MATERIAL_TABLE});
 
     console.log("Database insertion result:", dbResult);
 
