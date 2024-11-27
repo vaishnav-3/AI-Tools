@@ -1,7 +1,8 @@
+import { inngest } from "/inngest/client";
 import { courseOutlineAIModel } from "/configs/AiModel";
 import { db } from "/configs/db";
 import { STUDY_MATERIAL_TABLE } from "/configs/schema";
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
@@ -27,15 +28,22 @@ export async function POST(req) {
     const dbResult = await db
       .insert(STUDY_MATERIAL_TABLE)
       .values({
-        courseId: courseId,
-        courseType: courseType,
-        createdBy: createdBy,
-        topic: topic,
-        courseLayout: aiResult,
+        courseId,
+        courseType,
+        createdBy,
+        topic,
+        courseLayout: aiResult, // Ensure the AI response contains 'courseLayout'
       })
-      .returning({resp:STUDY_MATERIAL_TABLE});
+      .returning();
 
     console.log("Database insertion result:", dbResult);
+
+    const result = await inngest.send({
+      name: "notes.generate",
+      data: {
+        course: dbResult[0], // Adjusting for the correct returned object structure
+      },
+    });
 
     return NextResponse.json({ result: dbResult[0] });
   } catch (error) {

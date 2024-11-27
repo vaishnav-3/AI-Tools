@@ -44,3 +44,25 @@ const generationConfig = {
 
   //const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
   //console.log(result.response.text());
+
+  export const generateNotesAiModel = model.startChat({
+    generationConfig,
+    history: [
+      {
+        role: "user",
+        parts: [
+          {
+            text: 'Generate exam material detail content for each chapter , Make sure to includes all topic point in the content, make sure to give content in HTML format (Do not Add HTMLK , Head, Body, title tag), The chapters: \n"topics": [\n        "What is Object-Oriented Programming?",\n        "Principles of OOP: Encapsulation, Inheritance, Polymorphism, Abstraction",\n        "Benefits of OOP",\n        "Comparison with Procedural Programming",\n        "Classes and Objects: Basic Concepts"\n      ]',
+          },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "```html\n<h1>What is Object-Oriented Programming?</h1>\n<p>This chapter introduces the fundamental concept of Object-Oriented Programming (OOP).  It will cover:</p>\n<ul>\n  <li>Definition of OOP and its paradigm shift from procedural programming.</li>\n  <li>Key characteristics of OOP: objects, classes, and their relationships.</li>\n  <li>Real-world analogies to illustrate the concepts of objects and classes.</li>\n  <li>A brief history of OOP and its evolution.</li>\n  <li>Different programming languages that support OOP (e.g., Java, Python, C++, C#).</li>\n</ul>\n\n\n<h1>Principles of OOP: Encapsulation, Inheritance, Polymorphism, Abstraction</h1>\n<p>This chapter delves into the four fundamental principles of OOP:</p>\n<ul>\n  <li><strong>Encapsulation:</strong>\n    <ul>\n      <li>Definition and purpose of encapsulation.</li>\n      <li>Data hiding and access modifiers (public, private, protected).</li>\n      <li>Benefits of encapsulation: data integrity and code maintainability.</li>\n      <li>Implementation of encapsulation in various programming languages.</li>\n    </ul>\n  </li>\n  <li><strong>Inheritance:</strong>\n    <ul>\n      <li>Definition and purpose of inheritance.</li>\n      <li>Base classes and derived classes.</li>\n      <li>Types of inheritance (single, multiple, multilevel, hierarchical).</li>\n      <li>Code reusability and extensibility through inheritance.</li>\n      <li>Polymorphism in the context of inheritance.</li>\n    </ul>\n  </li>\n  <li><strong>Polymorphism:</strong>\n    <ul>\n      <li>Definition and purpose of polymorphism.</li>\n      <li>Compile-time polymorphism (method overloading).</li>\n      <li>Runtime polymorphism (method overriding).</li>\n      <li>Benefits of polymorphism: flexibility and extensibility.</li>\n      <li>Examples of polymorphism in different scenarios.</li>\n    </ul>\n  </li>\n  <li><strong>Abstraction:</strong>\n    <ul>\n      <li>Definition and purpose of abstraction.</li>\n      <li>Hiding complex implementation details and showing only essential information.</li>\n      <li>Abstract classes and interfaces.</li>\n      <li>Benefits of abstraction: simplified code and improved maintainability.</li>\n      <li>Relationship between abstraction and encapsulation.</li>\n    </ul>\n  </li>\n</ul>\n\n\n<h1>Benefits of OOP</h1>\n<p>This chapter discusses the advantages of using OOP in software development:</p>\n<ul>\n  <li>Modularity and reusability of code.</li>\n  <li>Improved code organization and maintainability.</li>\n  <li>Enhanced flexibility and scalability.</li>\n  <li>Data security through encapsulation.</li>\n  <li>Reduced development time and cost.</li>\n  <li>Easier debugging and testing.</li>\n</ul>\n\n\n<h1>Comparison with Procedural Programming</h1>\n<p>This chapter compares and contrasts OOP with procedural programming:</p>\n<ul>\n  <li>Fundamental differences in approach and structure.</li>\n  <li>Advantages and disadvantages of each paradigm.</li>\n  <li>Suitable applications for each programming paradigm.</li>\n  <li>A side-by-side comparison of code examples to illustrate the differences.</li>\n</ul>\n\n\n<h1>Classes and Objects: Basic Concepts</h1>\n<p>This chapter explains the core concepts of classes and objects:</p>\n<ul>\n  <li>Definition of a class as a blueprint for creating objects.</li>\n  <li>Definition of an object as an instance of a class.</li>\n  <li>Class members: attributes (data) and methods (functions).</li>\n  <li>Constructors and destructors.</li>\n  <li>Creating and manipulating objects in code.</li>\n  <li>Object lifecycle and memory management.</li>\n</ul>\n```\n",
+          },
+        ],
+      },
+    ],
+  });
