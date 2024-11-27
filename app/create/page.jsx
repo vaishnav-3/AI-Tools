@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useUser } from '@clerk/nextjs';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Alert from '../dashboard/_components/Alert';
 
 function Create() {
     const [step, setStep] = useState(0);

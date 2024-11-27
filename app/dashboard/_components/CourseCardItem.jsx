@@ -1,5 +1,7 @@
-import { RefreshCcw } from 'lucide-react';
 import React from 'react';
+import Loader from './Loader';
+import Link from 'next/link';
+import Progress from './Progress';
 
 function CourseCardItem({ course }) {
     console.log("course" , course.status)
@@ -12,11 +14,12 @@ function CourseCardItem({ course }) {
         </div>
         <h2 className="mt-3 font-medium text-lg">{course.courseLayout.courseTitle}</h2>
         <p className="text-sm line-clamp-2 text-gray-500">{course.courseLayout.courseSummary}</p>
-        <div className="w-full bg-gray-300 rounded-full h-[15px] mt-3">
+        <Progress max={10} value={5}/>
+        {/*<div className="w-full bg-gray-300 rounded-full h-[15px] mt-3">
           <div className="bg-blue-500 h-[15px] rounded-full" style={{ width: '50%' }}></div>
-        </div>
+        </div>*/}
         <div className='mt-3 flex justify-end'>
-            {course.status === "Generating" ? <h2 className='text-sm p-1 px-2 flex gap-2 items-center rounded-full bg-gray-400 text-white'> <RefreshCcw className='h-5 w-5'/> Generating...</h2> : <button className='btn btn-outline-primary'>View</button>}
+            {course.status === "Generating" ? <Loader/> : <Link href={'course/'+course.courseId}><button className='btn btn-outline-primary'>View</button></Link>}
         </div>
       </div>
     </div>
