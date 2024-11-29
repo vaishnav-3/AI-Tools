@@ -26,7 +26,7 @@ function ViewNotes() {
         courseId: courseId,
         studyType: "notes",
       });
-      console.log(result.data);
+      console.log("NOTES", result.data);
       setNotes(result.data);
     } catch (err) {
       console.error("Error fetching notes:", err.message);

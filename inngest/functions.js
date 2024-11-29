@@ -72,6 +72,7 @@ export const GenerateNotes = inngest.createFunction(
 0. Provided Chapters:
 ${JSON.stringify(chapter)}
 
+
 1. Structure:
 The JSON must include the following fields:
 chapterTitle (string): The title of the chapter.
@@ -106,6 +107,7 @@ Ensure the layout is visually appealing, with elements spaced out cleanly and a 
 4. Error-Free Output:
 Ensure the JSON is valid and parsable without errors.
 Properly escape quotation marks ("), line breaks (\n), and backslashes (\\) within strings.
+There should not be any Expecting 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', got 'undefined'
 Do not include undefined or null values in the JSON.
 Replace any missing data with appropriate placeholders or omit invalid entries entirely.
 
@@ -114,22 +116,41 @@ The JSON will be used in a React.js application styled with Tailwind CSS. Ensure
 Using className for all HTML elements.
 Maintaining clean, modular HTML snippets that can be directly rendered in React components.
 
-6. Output Example:
+**IMPORTANT**
+There should be an emoji
+Check twice or thrice that the output is like the given output example format (#6)
+Check twice or thrice to ensure that the JSON is valid and parsable without errors and that the application context is valid before continuing to use it as a React component.
+
+### 6. **Output Example:**
 {
-  "chapterTitle": "Introduction to Machine Learning",
-  "chapterSummary": "This chapter covers the basics of machine learning, including its definition, applications, and key algorithms.",
-  "emoji": "🤖",
-  "topics": [
-    {
-      "topicTitle": "What is Machine Learning?",
-      "content": "<div className='p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200'><h3 className='text-lg font-bold mb-2 text-xl text-center'>What is Machine Learning?</h3><p className='text-gray-700'>Machine learning is a branch of artificial intelligence that focuses on building systems that can learn from data to make decisions or predictions.</p></div>"
-    },
-    {
-      "topicTitle": "Types of Machine Learning",
-      "content": "<div className='p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200'><h3 className='text-lg font-bold mb-2 text-xl text-center'>Types of Machine Learning</h3><div className='list list-disc pl-5'><div className='list-item'>Supervised Learning</div><div className='list-item'>Unsupervised Learning</div><div className='list-item'>Reinforcement Learning</div></div></div>"
-    }
-  ]
+    "chapterTitle": "Networking and Multiplayer Game Development",
+    "chapterSummary": "Understand the complexities of building online multiplayer games, including networking protocols, synchronization techniques, and security.",
+    "emoji": "🌐",
+    "topics": [
+        {
+            "topicTitle": "Client-server architecture",
+            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Client-server architecture</h3><p className=\"text-gray-700\">In a client-server architecture, multiple clients connect to a central server. The server manages game state, handles player interactions, and distributes updates to the clients.  This architecture is suitable for large-scale games where managing game state on individual clients is impractical. The server is responsible for authoritative updates which keeps the game fair and consistent.  Clients send input to the server and receive updates on other players and game events.</p></div>"
+        },
+        {
+            "topicTitle": "Peer-to-peer networking",
+            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Peer-to-peer networking</h3><p className=\"text-gray-700\">In peer-to-peer (P2P) networking, each client acts as both a client and a server, communicating directly with other clients.  This eliminates the need for a central server, simplifying development and reducing latency. However, managing game state and preventing cheating can be more complex in P2P architectures.  P2P is well suited for small, low-latency games.</p></div>"
+        },
+        {
+            "topicTitle": "Network synchronization techniques (Lag compensation, interpolation)",
+            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Network synchronization techniques (Lag compensation, interpolation)</h3><p className=\"text-gray-700\">Network synchronization is crucial in multiplayer games to ensure consistency across all clients.  Lag compensation predicts player movement based on network latency, reducing the impact of delays. Interpolation smooths out jerky movements by interpolating between received updates, improving the visual experience.</p></div>"
+        },
+        {
+            "topicTitle": "Security considerations for online games",
+            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Security considerations for online games</h3><p className=\"text-gray-700\">Security is paramount in online games.  Protecting against cheating (e.g., aimbots, wallhacks) requires robust server-side validation and anti-cheat measures.  Protecting player data (e.g., accounts, personal information) necessitates secure authentication and encryption protocols.</p></div>"
+        },
+        {
+            "topicTitle": "Game networking libraries and APIs",
+            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Game networking libraries and APIs</h3><p className=\"text-gray-700\">Game networking libraries and APIs simplify network programming.  Popular choices include Unity's UNET, Unreal Engine's networking features, and third-party libraries like RakNet and ENet. These libraries handle low-level networking details, allowing developers to focus on game logic.</p></div>"
+        }
+    ]
 }
+
+
 
  7. **Additional Notes:**  
    - **IMPORTANT** There should be an emoji
@@ -141,7 +162,7 @@ Maintaining clean, modular HTML snippets that can be directly rendered in React 
  8. **Avoid Common Errors:**  
    - Do not generate outputs with unescaped special characters (e.g., 'Error: Parse error on line...').  
    - Double-check for mismatched brackets, missing fields, or improperly formatted strings.  
-   - Do not generate incomplete or ambiguous JSON objects.`;
+   - Do not generate incomplete or ambiguous JSON objects.;`;
 
 
           // Generate notes using AI model
