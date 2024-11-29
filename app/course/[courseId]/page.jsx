@@ -40,10 +40,9 @@ function Course() {
 
   return (
     <div className="h-screen">
-      <DashboardHeader />
-      <div className="mx-10 md:mx-36 lg:px-60 mt-10">
+      <div>
         <CourseIntroCard course={courseData} />
-        <StudyMaterialSection courseId={courseId} />
+        <StudyMaterialSection courseId={courseId} course={courseData}/>
         <ChapterList course={courseData} />
       </div>
     </div>

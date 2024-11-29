@@ -1,8 +1,10 @@
+// StudyMaterialSection Component
 import React, { useEffect, useState } from "react";
 import MaterialCardItem from "./MaterialCardItem";
 import axios from "axios";
+import Link from "next/link";
 
-function StudyMaterialSection({ courseId }) {
+function StudyMaterialSection({ courseId, course }) {
   const [studyTypeContent, setStudyTypeContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,28 +15,28 @@ function StudyMaterialSection({ courseId }) {
       desc: "Read notes to prepare it",
       icon: "/notes.png",
       path: "/notes",
-      type: "notes"
+      type: "notes",
     },
     {
       name: "Flashcard",
       desc: "Flashcard to help remember concepts",
       icon: "/flashcard.png",
       path: "/flashcards",
-      type: "flashcard"
+      type: "flashcard",
     },
     {
       name: "Quiz",
       desc: "Great way to test your knowledge",
       icon: "/quiz.png",
       path: "/quiz",
-      type: "quiz"
+      type: "quiz",
     },
     {
       name: "Question/Answer",
       desc: "Help to practice your learning",
       icon: "/qa.png",
       path: "/qa",
-      type: "qa"
+      type: "qa",
     },
   ];
 
@@ -44,10 +46,10 @@ function StudyMaterialSection({ courseId }) {
         courseId: courseId,
         studyType: "ALL",
       });
-      console.log(result.data);
+      console.log("GetStudyMaterial", result.data);
       setStudyTypeContent(result.data);
     } catch (err) {
-      console.error("Error fetching study material:", err.message);
+      console.error("Error fetching study material:", err);
       setError("Failed to load study material.");
     } finally {
       setLoading(false);
@@ -73,7 +75,13 @@ function StudyMaterialSection({ courseId }) {
       <h2 className="font-medium text-xl">Study Material</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-3">
         {MaterialList.map((item, index) => (
-          <MaterialCardItem item={item} key={index} studyTypeContent={studyTypeContent} />
+            <MaterialCardItem
+              key={index}
+              item={item}
+              studyTypeContent={studyTypeContent}
+              course={course}
+              refreshData={GetStudyMaterial}
+            />
         ))}
       </div>
     </div>
