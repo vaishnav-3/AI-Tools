@@ -11,7 +11,7 @@ function ViewQA() {
   const [stepCount, setStepCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showAnswer, setShowAnswer] = useState(false); // Tracks whether the answer is shown
+  const [showAnswer, setShowAnswer] = useState(true); // Tracks whether the answer is shown
   const { courseId } = useParams();
 
   useEffect(() => {
@@ -36,12 +36,10 @@ function ViewQA() {
 
   const prevStep = () => {
     setStepCount((prev) => (prev > 0 ? prev - 1 : prev));
-    setShowAnswer(false); // Reset the answer visibility
   };
 
   const nextStep = () => {
     setStepCount((prev) => (prev < qaData.length - 1 ? prev + 1 : prev));
-    setShowAnswer(false); // Reset the answer visibility
   };
 
   const toggleAnswer = () => {
@@ -101,7 +99,7 @@ function ViewQA() {
 
           {/* Smoothly toggle the answer inside a container */}
           <div
-            className={`transition-all duration-500 ease-in-out overflow-hidden bg-gray-100 p-4 rounded-md shadow-md`}
+            className={`transition-all duration-500 ease-in-out overflow-hidden bg-white p-4 rounded-md shadow-md`}
             style={{
               maxHeight: showAnswer ? "1000px" : "0", // Transition max height
               opacity: showAnswer ? "1" : "0", // Transition opacity
@@ -111,7 +109,7 @@ function ViewQA() {
               className={`transition-all duration-500 ease-in-out`}
               style={{
                 opacity: showAnswer ? "1" : "0", // Smooth fade-in effect
-                maxHeight: showAnswer ? "500px" : "0", // Smooth expand/collapse
+                maxHeight: showAnswer ? "1000px" : "0", // Smooth expand/collapse
               }}
             >
               {/* Render Markdown Content */}
