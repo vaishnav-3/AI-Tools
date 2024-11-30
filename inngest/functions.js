@@ -6,7 +6,7 @@ import {
 } from "../configs/schema";
 import { db } from "../configs/db";
 import { inngest } from "./client";
-import { generateNotesAiModel, GenerateQuizAiModel, GenerateStudyTypeContentAiModel } from "../configs/AiModel";
+import { generateNotesAiModel, GenerateQaAiModel, GenerateQuizAiModel, GenerateStudyTypeContentAiModel } from "../configs/AiModel";
 import { eq } from "drizzle-orm";
 
 // Function to test the "hello-world" event
@@ -210,10 +210,12 @@ export const GenerateStudyTypeContent = inngest.createFunction(
   async({event, step}) => {
     const {studyType, prompt, courseId, recordId} = event.data;
     const AIResult = await step.run('Generating Flashcard using AI', async()=>{
-      const result = 
-      studyType == "Flashcard" ? 
-      await GenerateStudyTypeContentAiModel.sendMessage(prompt):
-      await GenerateQuizAiModel.sendMessage(prompt);
+      const result =
+        studyType == "Flashcard"
+          ? await GenerateStudyTypeContentAiModel.sendMessage(prompt)
+          : studyType == "Quiz"
+          ? await GenerateQuizAiModel.sendMessage(prompt)
+          : await GenerateQaAiModel.sendMessage(prompt);
       const AIResult = JSON.parse(result.response.text())
       return AIResult;
     })

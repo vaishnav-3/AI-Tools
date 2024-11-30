@@ -1,9 +1,7 @@
-import localFont from "next/font/local";
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "./provider";
-import Alert from "./dashboard/_components/Alert";
 
 export const metadata = {
   title: "Create Next App",
