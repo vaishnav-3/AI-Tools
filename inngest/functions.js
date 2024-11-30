@@ -6,7 +6,12 @@ import {
 } from "../configs/schema";
 import { db } from "../configs/db";
 import { inngest } from "./client";
-import { generateNotesAiModel, GenerateQaAiModel, GenerateQuizAiModel, GenerateStudyTypeContentAiModel } from "../configs/AiModel";
+import {
+  generateNotesAiModel,
+  GenerateQaAiModel,
+  GenerateQuizAiModel,
+  GenerateStudyTypeContentAiModel,
+} from "../configs/AiModel";
 import { eq } from "drizzle-orm";
 
 // Function to test the "hello-world" event
@@ -75,80 +80,50 @@ ${JSON.stringify(chapter)}
 
 1. Structure:
 The JSON must include the following fields:
-chapterTitle (string): The title of the chapter.
-chapterSummary (string): A brief summary of the chapter.
-emoji (string): A relevant emoji to visually represent the chapter.
-topics (array): A list of topics covered in the chapter. Each topic must be an object with:
+chapterTitle: The title of the chapter.
+chapterSummary: A brief summary of the chapter.
+emoji: A relevant emoji to visually represent the chapter.
+topics: A list of topics covered in the chapter. Each topic must be an object with:
 topicTitle (string): The title of the topic.
-content (string): Detailed content for the topic written in HTML format, styled with Tailwind CSS, and ready for rendering in a React.js component.
+content (string): Detailed content for the topic written in Md format, and ready for rendering in a React.js component.
+
+OUTPUT SHOULD BE LIKE : 
+{
+  "chapterTitle": "WordPress Fundamentals",
+  "chapterSummary": "Introduction to WordPress, its architecture, core components, and installation process.",
+  "emoji": "🌱",
+  "topics": [
+    {
+      "topicTitle": "What is WordPress?",
+      "content": "# What is WordPress? 🤔\n\nWordPress is a free and open-source content management system (CMS) used to build and manage websites and blogs. Its popularity stems from its user-friendly interface, extensive plugin ecosystem, and robust theme customization options. \n\n**Key Features:**\n\n* **Ease of Use:**  Intuitive interface, making it accessible to beginners and experts alike.\n* **Flexibility:**  Highly adaptable to various website needs through themes and plugins.\n* **Extensibility:** Thousands of plugins add functionality, extending core capabilities.\n* **SEO-Friendly:** Built-in features aid search engine optimization.\n* **Large Community:**  Extensive support network provides assistance and resources.\n\n**WordPress Editions:**\n\n* **WordPress.org (Self-hosted):**  You control hosting, offering maximum flexibility and customization. Requires technical setup.\n* **WordPress.com (Hosted):**  WordPress handles hosting, simplifying setup but limiting customization options."
+    },
+    {
+      "topicTitle": "WordPress Architecture",
+      "content": "# WordPress Architecture ⚙️\n\nWordPress follows a three-tier architecture:\n\n1. **Presentation Layer (Frontend):**  The user interface; what visitors see.  Managed primarily by themes.\n2. **Application Layer:** The core WordPress engine, processing requests, database interactions, and plugin execution.\n3. **Data Layer:**  The MySQL database storing content, settings, users, and other website data.\n\n**Key Components:**\n\n* **Core Files:** The fundamental WordPress files responsible for core functionality.\n* **Database (MySQL):** Stores all website information.\n* **Themes:** Control the website's visual presentation and layout.\n* **Plugins:** Extend functionality by adding features (e.g., contact forms, e-commerce).\n\n**Simplified Diagram:**\n\n  '\nUser --> Presentation Layer (Theme) --> Application Layer (Core + Plugins) --> Data Layer (Database)\n'"
+    },
+    {
+      "topicTitle": "Installation and Setup",
+      "content": "# Installation and Setup 💻\n\n**Prerequisites:**\n\n* **Web Hosting:**  A hosting provider supporting PHP, MySQL, and databases (e.g., Bluehost, SiteGround).\n* **Domain Name:** A registered domain name (e.g., 'yourwebsite.com').\n* **WordPress Files:** Download the latest version from wordpress.org.\n\n**Steps:**\n\n1. **Upload:** Upload the downloaded files to your web hosting account via FTP or your hosting control panel.\n2. **Database Creation:** Create a MySQL database and user account in your hosting control panel.\n3. **Configuration:**  During installation, provide database credentials (name, username, password, hostname).\n4. **Installation:** Follow the on-screen instructions in your browser to complete setup.\n5. **Initial Settings:** Set the site title, admin username and password, and other basic settings.\n\n**Troubleshooting:**\n\n* **Database Errors:** Double-check database credentials.\n* **Permission Issues:** Ensure correct file permissions on your server.\n* **Resource Limits:**  Check server resources (PHP memory limit)."
+    },
+    {
+      "topicTitle": "WordPress Dashboard Overview",
+      "content": "# WordPress Dashboard Overview 📊\n\nThe WordPress dashboard is the central administration interface. Key sections include:\n\n* **Dashboard:**  Displays recent activity, quick drafts, and notifications.\n* **Posts:** Manage blog posts (create, edit, publish, schedule).\n* **Pages:** Manage static pages (e.g., About Us, Contact).\n* **Media:** Upload and manage images, videos, and other media files.\n* **Appearance:** Customize themes and appearance.\n* **Plugins:** Install, activate, and manage plugins.\n* **Users:** Manage user accounts and roles.\n* **Settings:** Configure general website settings.\n\n**Navigation:**  Become familiar with the dashboard's layout for efficient website management. 📌"
+    },
+    {
+      "topicTitle": "Understanding WordPress Themes and Plugins",
+      "content": "# WordPress Themes and Plugins ✨\n\n**Themes:** Themes control the website's visual design and layout. \n\n* **Theme Selection:** Choose themes based on website purpose and design preferences.\n* **Customization:** Many themes offer options to customize colors, fonts, and layouts.\n* **Child Themes:**  Creating a child theme protects customizations when updating the parent theme.\n\n**Plugins:** Plugins extend WordPress functionality.\n\n* **Plugin Selection:** Choose reputable plugins from WordPress.org.\n* **Compatibility:**  Be mindful of plugin conflicts – test thoroughly before activating multiple plugins.\n* **Updates:** Regularly update plugins for security and bug fixes.\n\n**Examples:**\n\n* **Popular Themes:**  Astra, OceanWP, GeneratePress\n* **Popular Plugins:** Yoast SEO, WooCommerce, Akismet"
+    }
+  ]
+}
+
 
 2. Content Formatting:
-HTML Requirements:
-Wrap all content in <div> elements with Tailwind CSS classes, such as p-4, bg-gray-100, rounded-lg, shadow-md, etc.
-Use semantic HTML elements:
-<h3> for topic titles.
-<p> for text paragraphs.
-<div> with list-disc and list-item classes for lists.
-Escape all special characters properly to ensure valid JSON formatting.
-Use className instead of class for styling compatibility with React.js.
-Make the HTML content visually attractive:
-Use Tailwind CSS classes for enhanced styling, such as bg-gradient-to-r, text-center, text-xl, hover:bg-blue-200, etc.
-Add additional styling to make each topic's content visually engaging and modern-looking.
+Give me in .md format
 
-3. Styling Guidelines:
-Apply Tailwind CSS classes for responsive, aesthetic designs:
-Padding: p-4, p-2, etc.
-Backgrounds: bg-gray-100, bg-blue-200, bg-gradient-to-r, etc.
-Borders and shadows: rounded-lg, shadow-md, etc.
-Hover effects: hover:bg-blue-200, hover:text-white, etc.
-Maintain consistency with font styles (text-lg, font-bold, text-gray-700).
-Ensure the layout is visually appealing, with elements spaced out cleanly and a good balance of colors and fonts.
-
-4. Error-Free Output:
-Ensure the JSON is valid and parsable without errors.
-Properly escape quotation marks ("), line breaks (\n), and backslashes (\\) within strings.
-There should not be any Expecting 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', got 'undefined'
-Do not include undefined or null values in the JSON.
-Replace any missing data with appropriate placeholders or omit invalid entries entirely.
-
-5. Application Context:
-The JSON will be used in a React.js application styled with Tailwind CSS. Ensure compatibility with this environment by:
-Using className for all HTML elements.
-Maintaining clean, modular HTML snippets that can be directly rendered in React components.
 
 **IMPORTANT**
 There should be an emoji
-Check twice or thrice that the output is like the given output example format (#6)
-Check twice or thrice to ensure that the JSON is valid and parsable without errors and that the application context is valid before continuing to use it as a React component.
-
-### 6. **Output Example:**
-{
-    "chapterTitle": "Networking and Multiplayer Game Development",
-    "chapterSummary": "Understand the complexities of building online multiplayer games, including networking protocols, synchronization techniques, and security.",
-    "emoji": "🌐",
-    "topics": [
-        {
-            "topicTitle": "Client-server architecture",
-            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Client-server architecture</h3><p className=\"text-gray-700\">In a client-server architecture, multiple clients connect to a central server. The server manages game state, handles player interactions, and distributes updates to the clients.  This architecture is suitable for large-scale games where managing game state on individual clients is impractical. The server is responsible for authoritative updates which keeps the game fair and consistent.  Clients send input to the server and receive updates on other players and game events.</p></div>"
-        },
-        {
-            "topicTitle": "Peer-to-peer networking",
-            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Peer-to-peer networking</h3><p className=\"text-gray-700\">In peer-to-peer (P2P) networking, each client acts as both a client and a server, communicating directly with other clients.  This eliminates the need for a central server, simplifying development and reducing latency. However, managing game state and preventing cheating can be more complex in P2P architectures.  P2P is well suited for small, low-latency games.</p></div>"
-        },
-        {
-            "topicTitle": "Network synchronization techniques (Lag compensation, interpolation)",
-            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Network synchronization techniques (Lag compensation, interpolation)</h3><p className=\"text-gray-700\">Network synchronization is crucial in multiplayer games to ensure consistency across all clients.  Lag compensation predicts player movement based on network latency, reducing the impact of delays. Interpolation smooths out jerky movements by interpolating between received updates, improving the visual experience.</p></div>"
-        },
-        {
-            "topicTitle": "Security considerations for online games",
-            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Security considerations for online games</h3><p className=\"text-gray-700\">Security is paramount in online games.  Protecting against cheating (e.g., aimbots, wallhacks) requires robust server-side validation and anti-cheat measures.  Protecting player data (e.g., accounts, personal information) necessitates secure authentication and encryption protocols.</p></div>"
-        },
-        {
-            "topicTitle": "Game networking libraries and APIs",
-            "content": "<div className=\"p-4 bg-gray-100 rounded-lg shadow-md hover:bg-blue-200\"><h3 className=\"text-lg font-bold mb-2 text-xl text-center\">Game networking libraries and APIs</h3><p className=\"text-gray-700\">Game networking libraries and APIs simplify network programming.  Popular choices include Unity's UNET, Unreal Engine's networking features, and third-party libraries like RakNet and ENet. These libraries handle low-level networking details, allowing developers to focus on game logic.</p></div>"
-        }
-    ]
-}
+Give me in .md format
 
 
 
@@ -160,10 +135,7 @@ Check twice or thrice to ensure that the JSON is valid and parsable without erro
    - All generated content should be focused on clarity and exam preparation, with minimal redundancy.  
 
  8. **Avoid Common Errors:**  
-   - Do not generate outputs with unescaped special characters (e.g., 'Error: Parse error on line...').  
-   - Double-check for mismatched brackets, missing fields, or improperly formatted strings.  
-   - Do not generate incomplete or ambiguous JSON objects.;`;
-
+   - Double-check for mismatched brackets, missing fields, or improperly formatted strings.  `;
 
           // Generate notes using AI model
           const result = await generateNotesAiModel.sendMessage(PROMPT);
@@ -205,21 +177,24 @@ Check twice or thrice to ensure that the JSON is valid and parsable without erro
 );
 
 export const GenerateStudyTypeContent = inngest.createFunction(
-  {id: "Generate Study Type Content"},
-  {event: "studyType.content"},
-  async({event, step}) => {
-    const {studyType, prompt, courseId, recordId} = event.data;
-    const AIResult = await step.run('Generating Flashcard using AI', async()=>{
-      const result =
-        studyType == "Flashcard"
-          ? await GenerateStudyTypeContentAiModel.sendMessage(prompt)
-          : studyType == "Quiz"
-          ? await GenerateQuizAiModel.sendMessage(prompt)
-          : await GenerateQaAiModel.sendMessage(prompt);
-      const AIResult = JSON.parse(result.response.text())
-      return AIResult;
-    })
-    const DbResult = await step.run('Save Result to DB', async()=>{
+  { id: "Generate Study Type Content" },
+  { event: "studyType.content" },
+  async ({ event, step }) => {
+    const { studyType, prompt, courseId, recordId } = event.data;
+    const AIResult = await step.run(
+      "Generating Flashcard using AI",
+      async () => {
+        const result =
+          studyType == "Flashcard"
+            ? await GenerateStudyTypeContentAiModel.sendMessage(prompt)
+            : studyType == "Quiz"
+            ? await GenerateQuizAiModel.sendMessage(prompt)
+            : await GenerateQaAiModel.sendMessage(prompt);
+        const AIResult = JSON.parse(result.response.text());
+        return AIResult;
+      }
+    );
+    const DbResult = await step.run("Save Result to DB", async () => {
       const result = await db
         .update(STUDY_TYPE_CONTENT_TABLE)
         .set({
@@ -227,7 +202,7 @@ export const GenerateStudyTypeContent = inngest.createFunction(
           status: "Ready",
         })
         .where(eq(STUDY_TYPE_CONTENT_TABLE.id, recordId));
-      return 'Data Inserted'
-    })
+      return "Data Inserted";
+    });
   }
-)
+);
