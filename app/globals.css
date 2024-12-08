@@ -13,7 +13,7 @@
 /* Apply custom properties to the body */
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: #ededed;
   font-family: Arial, Helvetica, sans-serif;
 }
 
