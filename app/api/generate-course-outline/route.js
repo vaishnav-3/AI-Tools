@@ -3,6 +3,7 @@ import { courseOutlineAIModel } from "/configs/AiModel";
 import { db } from "/configs/db";
 import { STUDY_MATERIAL_TABLE } from "/configs/schema";
 import { NextResponse } from "next/server";
+import service from "../../../configs/service";  // Fix import
 
 export async function POST(req) {
   try {
@@ -25,6 +26,21 @@ export async function POST(req) {
     const aiResult = JSON.parse(aiResp.response.text());
     console.log("Parsed AI result:", aiResult);
 
+    const chaptersWithVideos = await Promise.all(
+      aiResult.chapters.map(async (chapter) => {
+        let videoId = '';
+        try {
+          const videos = await service.getVideos(`${topic}: ${chapter.chapterTitle}`); // Use chapterTitle instead of title
+          console.log("YouTube API response:", videos); // Debug log
+          videoId = videos[0]?.id?.videoId || '';
+          console.log("Extracted videoId:", videoId); // Debug log
+        } catch (err) {
+          console.log(`Error fetching video for chapter ${chapter.chapterTitle}:`, err);
+        }
+        return { ...chapter, videoId };
+      })
+    );
+
     const dbResult = await db
       .insert(STUDY_MATERIAL_TABLE)
       .values({
@@ -32,7 +48,7 @@ export async function POST(req) {
         courseType,
         createdBy,
         topic,
-        courseLayout: aiResult, // Ensure the AI response contains 'courseLayout'
+        courseLayout: { ...aiResult, chapters: chaptersWithVideos }, // Ensure the AI response contains 'courseLayout'
       })
       .returning();
 

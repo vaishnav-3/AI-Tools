@@ -24,6 +24,8 @@ function Course() {
     }
   };
 
+  
+
   useEffect(() => {
     if (courseId) {
       GetCourse();

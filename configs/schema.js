@@ -1,4 +1,3 @@
-
 import { pgTable, serial, varchar, boolean, json, text, integer } from "drizzle-orm/pg-core";
 
 export const USER_TABLE = pgTable("users", {
@@ -23,8 +22,9 @@ export const CHAPTER_NOTES_TABLE = pgTable('chapterNotes', {
     id: serial().primaryKey(),
     courseId: varchar().notNull(),
     chapterId: integer().notNull(),
-    notes: text()
-})
+    notes: text(),
+    videoId: varchar('videoId').default('') // Add default value
+});
 
 export const STUDY_TYPE_CONTENT_TABLE = pgTable('studyTypeContent', {
   id: serial().primaryKey(),

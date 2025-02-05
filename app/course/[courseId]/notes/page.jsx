@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import VideoPlayer from "../_components/VideoPlayer";
 
 function ViewNotes() {
   const { courseId } = useParams();
@@ -101,6 +102,13 @@ function ViewNotes() {
             {jsonObject.chapterTitle}
           </div>
           <p className="text-gray-700 mb-5">{jsonObject.chapterSummary}</p>
+
+          {jsonObject && jsonObject.videoId && (
+            <div className="mt-4 mb-6">
+              <h3 className="text-lg font-semibold mb-2">Chapter Video</h3>
+              <VideoPlayer videoId={jsonObject.videoId} />
+            </div>
+          )}
 
           {jsonObject.topics.map((topic, index) => (
             <div
