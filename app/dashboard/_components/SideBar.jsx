@@ -4,6 +4,7 @@ import Dashboard from '../page';
 import { LayoutDashboard, LeafyGreenIcon, UserCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { NotebookPen } from 'lucide-react';
 
 
 function SideBar() {
@@ -15,9 +16,9 @@ function SideBar() {
             path: '/dashboard',
         },
         {
-            name: 'MathAi',
-            icon: LeafyGreenIcon,
-            path: 'http://localhost:5173/',
+            name: 'Make Notes',
+            icon: NotebookPen,
+            path: 'http://localhost:3001/dashboard',
         },
         {
             name: 'Profile',
@@ -31,7 +32,7 @@ function SideBar() {
     <div className="h-screen shadow-md p-5">
       <div className="flex gap-2 items-center">
         <img src="/logo.svg" alt="logo" width={40} height={40} />
-        <h2 className="font-bold text-2xl">TutorAi</h2>
+        <h2 className="font-bold text-2xl">LearnX AI</h2>
       </div>
       <div className="mt-10">
         <Link href='/create' className='w-full'>

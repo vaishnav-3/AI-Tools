@@ -1,9 +1,39 @@
 import React from "react";
 import Loader from "./Loader";
 import Link from "next/link";
+import { IoEllipsisVerticalSharp } from "react-icons/io5";
+import DropdownOption from "./DropdownOption";
+import { db } from "./../../../configs/db";
+import { eq } from "drizzle-orm";
+import { STUDY_MATERIAL_TABLE } from "./../../../configs/db";
 
-function CourseCardItem({ course }) {
+
+function CourseCardItem({ course, refreshData }) {
+  console.log("CourseCardItem rendered with course:", course);
   console.log("course", course.status);
+
+  const handleOnDelete = async () => {
+    console.log("handleOnDelete called with course:", course);
+    if (!course || !course.courseId) {
+      console.error("Error: course or courseId is undefined");
+      return;
+    }
+  
+    try {
+      const resp = await db
+        .delete(STUDY_MATERIAL_TABLE)
+        .where(eq(STUDY_MATERIAL_TABLE.courseId, course.courseId))
+        .returning({ course: STUDY_MATERIAL_TABLE.courseId });
+      
+        console.log("Delete response:", resp);
+      if (resp.length > 0) {
+        refreshData();
+      }
+    } catch (error) {
+      console.error("Error deleting course:", error);
+    }
+  };
+  
 
   return (
     <div className="p-4  w-full border rounded-lg shadow-md bg-gray-100">
@@ -25,7 +55,7 @@ function CourseCardItem({ course }) {
           <p className="line-clamp-4">{course.courseLayout.courseSummary}</p>
         </div>
 
-        <div className="mt-5 flex justify-end items-center">
+        <div className="mt-5 flex justify-end items-center gap-4">
           {course.status === "Generating" ? (
             <div className="flex justify-center items-center">
               <Loader />
@@ -37,6 +67,13 @@ function CourseCardItem({ course }) {
               </button>
             </Link>
           )}
+          <h2>
+
+            <DropdownOption
+              handleOnDelete={() => handleOnDelete()}>
+
+            </DropdownOption>
+          </h2>
         </div>
       </div>
     </div>

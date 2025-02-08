@@ -56,11 +56,13 @@ function ViewNotes() {
   } catch (err) {
     console.error("Error parsing JSON:", err.message);
     return (
-      <div className="text-center text-red-500">
+      <div className="text-center text-red-500"> 
         Error: Failed to parse notes data.
       </div>
     );
   }
+
+  const videoId = notes[stepCount]?.videoId;
 
   return (
     <div className="h-screen p-5">
@@ -103,10 +105,10 @@ function ViewNotes() {
           </div>
           <p className="text-gray-700 mb-5">{jsonObject.chapterSummary}</p>
 
-          {jsonObject && jsonObject.videoId && (
+          {videoId && (
             <div className="mt-4 mb-6">
               <h3 className="text-lg font-semibold mb-2">Chapter Video</h3>
-              <VideoPlayer videoId={jsonObject.videoId} />
+              <VideoPlayer videoId={videoId} />
             </div>
           )}
 

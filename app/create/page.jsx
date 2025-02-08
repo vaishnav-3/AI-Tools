@@ -8,6 +8,7 @@ import { useUser } from '@clerk/nextjs';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Alert from '../dashboard/_components/Alert';
+// import { toast } from './../../src/components/ui/button';
 
 function Create() {
     const [step, setStep] = useState(0);
@@ -47,6 +48,8 @@ function Create() {
         console.log("API Response:", result.data.result.resp);
         setLoading(false);
         router.replace('/dashboard')
+        // toast(<h2 className='font-bold'>Course Content Generating Please wait for a moment</h2>);
+
       } catch (error) {
         console.error(
           "Error generating course outline:",

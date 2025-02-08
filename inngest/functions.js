@@ -146,6 +146,8 @@ Give me in .md format
             chapterId: index,
             courseId: course.courseId,
             notes: aiResp,
+            videoId: chapter.videoId,
+            
           });
         });
 

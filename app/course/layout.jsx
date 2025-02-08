@@ -10,4 +10,4 @@ function CourseViewLayout({children}) {
   );
 }
 
-export default CourseViewLayout
+export default CourseViewLayout 
