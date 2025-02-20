@@ -19,11 +19,7 @@ function SideBar() {
             name: 'Make Notes',
             icon: NotebookPen,
             path: 'http://localhost:3001/dashboard',
-        },
-        {
-            name: 'Profile',
-            icon: UserCircle,
-            path: '/dashboard/profile',        }
+        }       
     ]
 
     const path = usePathname();
