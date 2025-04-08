@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import VideoPlayer from "../_components/VideoPlayer";
+import Link from "next/link";
 
 function ViewNotes() {
   const { courseId } = useParams();
@@ -13,7 +14,7 @@ function ViewNotes() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [stepCount, setStepCount] = useState(0);
-
+ 
   const prevStep = () => stepCount > 0 && setStepCount(stepCount - 1);
   const nextStep = () =>
     stepCount < notes.length - 1 && setStepCount(stepCount + 1);
@@ -66,68 +67,73 @@ function ViewNotes() {
 
   return (
     <div className="h-screen p-5">
-      {/* Navigation */}
-      <div className="flex gap-5 items-center mb-5">
-        <button
-          className="btn btn-outline-primary"
-          onClick={prevStep}
-          disabled={stepCount === 0 || notes.length === 0}
-        >
-          Previous
-        </button>
+  {/* Navigation */}
+  <div className="flex gap-5 items-center mb-5">
+    {/* Button to Navigate to StudyMaterialSection */}
+    <Link href={`/course/${courseId}`}>
+      <button className="btn btn-primary">Material Section</button>
+    </Link>
 
-        <div className="flex w-full gap-2">
-          {notes.map((_, index) => (
-            <div
-              key={index}
-              className={`w-full h-2 rounded-full ${
-                index <= stepCount ? "bg-primary" : "bg-gray-300"
-              }`}
-            ></div>
-          ))}
-        </div>
+    <button
+      className="btn btn-outline-primary"
+      onClick={prevStep}
+      disabled={stepCount === 0 || notes.length === 0}
+    >
+      Previous
+    </button>
 
-        <button
-          className="btn btn-outline-primary"
-          onClick={nextStep}
-          disabled={stepCount === notes.length - 1 || notes.length === 0}
-        >
-          Next
-        </button>
+    <div className="flex w-full gap-2">
+      {notes.map((_, index) => (
+        <div
+          key={index}
+          className={`w-full h-2 rounded-full ${
+            index <= stepCount ? "bg-primary" : "bg-gray-300"
+          }`}
+        ></div>
+      ))}
+    </div>
+
+    <button
+      className="btn btn-outline-primary"
+      onClick={nextStep}
+      disabled={stepCount === notes.length - 1 || notes.length === 0}
+    >
+      Next
+    </button>
+  </div>
+
+  {/* Render Content */}
+  {jsonObject && (
+    <div>
+      <div className="flex text-2xl font-bold mb-3">
+        <span className="pr-3">{jsonObject.emoji}</span>
+        {jsonObject.chapterTitle}
       </div>
+      <p className="text-gray-700 mb-5">{jsonObject.chapterSummary}</p>
 
-      {/* Render Content */}
-      {jsonObject && (
-        <div>
-          <div className="flex text-2xl font-bold mb-3">
-            <span className="pr-3">{jsonObject.emoji}</span>
-            {jsonObject.chapterTitle}
-          </div>
-          <p className="text-gray-700 mb-5">{jsonObject.chapterSummary}</p>
-
-          {videoId && (
-            <div className="mt-4 mb-6">
-              <h3 className="text-lg font-semibold mb-2">Chapter Video</h3>
-              <VideoPlayer videoId={videoId} />
-            </div>
-          )}
-
-          {jsonObject.topics.map((topic, index) => (
-            <div
-              key={index}
-              className="p-4 bg-gray-100 rounded-lg shadow-md mb-4"
-            >
-              <h1 className="text-lg font-bold mb-2">{topic.topicTitle}</h1>
-              {/* Render Markdown Content */}
-              <ReactMarkdown
-                children={topic.content}
-                remarkPlugins={[remarkGfm]}
-              />
-            </div>
-          ))}
+      {videoId && (
+        <div className="mt-4 mb-6">
+          <h3 className="text-lg font-semibold mb-2">Chapter Video</h3>
+          <VideoPlayer videoId={videoId} />
         </div>
       )}
+
+      {jsonObject.topics.map((topic, index) => (
+        <div
+          key={index}
+          className="p-4 bg-gray-100 rounded-lg shadow-md mb-4"
+        >
+          <h1 className="text-lg font-bold mb-2">{topic.topicTitle}</h1>
+          {/* Render Markdown Content */}
+          <ReactMarkdown
+            children={topic.content}
+            remarkPlugins={[remarkGfm]}
+          />
+        </div>
+      ))}
     </div>
+  )}
+</div>
   );
 }
 

@@ -9,7 +9,7 @@ function DashboardHeader() {
   const isDashboardPath = pathname === "/dashboard";
 
   return (
-    <div className={`p-5 shadow-md flex items-center ${isDashboardPath ? "justify-end" : "justify-between"}`}>
+    <div className={`p-5  flex items-center ${isDashboardPath ? "justify-end" : "justify-between"}`}>
       {!isDashboardPath && (
         <Link href="/dashboard" className="flex gap-2 items-center">
           <img src="/logo.svg" alt="logo" width={40} height={40} />

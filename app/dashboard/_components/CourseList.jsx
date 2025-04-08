@@ -41,7 +41,7 @@ function CourseList() {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="mt-10">
+    <div className="mt-2">
         <h2 className="font-bold text-2xl flex justify-between items-center">Your Study Material
           <Button onClick={GetCourseList} variant="outline" className="border-primary text-primary"><RefreshCw/></Button>
         </h2>
