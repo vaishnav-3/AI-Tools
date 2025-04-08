@@ -22,5 +22,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+/* Hide Next.js error overlay */
+.nextjs-container-build-error,
+.nextjs-build-error-overlay,
+.nextjs-overlay-container {
+  display: none !important;
+}
+
+
 /* Ensure all elements inherit the background color */
 

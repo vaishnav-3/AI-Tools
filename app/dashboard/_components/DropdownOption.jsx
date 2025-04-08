@@ -15,10 +15,14 @@ function DropdownOption({Children, handleOnDelete}) {
   return (
         <DropdownMenu>
             <DropdownMenuTrigger><IoEllipsisVerticalSharp /></DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuItem onClick={handleOnDelete}>
-                    <div className='flex items-center gap-1 '><GoTrash />Delete</div>
-                </DropdownMenuItem>
+            <DropdownMenuContent className="bg-white shadow-md rounded-md">
+            <DropdownMenuItem
+                onClick={handleOnDelete}
+                className="flex items-center gap-2 text-red-600 hover:bg-red-100 cursor-pointer"
+              >
+                <GoTrash />
+                <span>Delete</span>
+              </DropdownMenuItem>
 
             </DropdownMenuContent>
         </DropdownMenu>

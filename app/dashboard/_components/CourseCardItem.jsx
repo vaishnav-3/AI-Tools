@@ -5,7 +5,7 @@ import { IoEllipsisVerticalSharp } from "react-icons/io5";
 import DropdownOption from "./DropdownOption";
 import { db } from "./../../../configs/db";
 import { eq } from "drizzle-orm";
-import { STUDY_MATERIAL_TABLE } from "./../../../configs/db";
+import { STUDY_MATERIAL_TABLE } from "./../../../configs/schema";
 
 
 function CourseCardItem({ course, refreshData }) {
@@ -20,20 +20,24 @@ function CourseCardItem({ course, refreshData }) {
     }
   
     try {
+      console.log("Attempting to delete course with ID:", course.courseId);
       const resp = await db
         .delete(STUDY_MATERIAL_TABLE)
         .where(eq(STUDY_MATERIAL_TABLE.courseId, course.courseId))
         .returning({ course: STUDY_MATERIAL_TABLE.courseId });
-      
-        console.log("Delete response:", resp);
+  
+      console.log("Delete response:", resp);
       if (resp.length > 0) {
-        refreshData();
+        console.log("Course deleted successfully, refreshing data...");
+        refreshData(true);
+      } else {
+        console.warn("No rows were deleted. Check if the course ID exists in the database.");
       }
     } catch (error) {
-      console.error("Error deleting course:", error);
+      console.error("Error deleting course:", error.message, error.stack);
     }
   };
-  
+   
 
   return (
     <div className="p-4  w-full border rounded-lg shadow-md bg-gray-100">

@@ -47,7 +47,7 @@ function CourseList() {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-2 gap-5">
             {loading==false? courseList.map((course, index) => (
-                <CourseCardItem course={course} key={index} refreshData={()=>GetCourseList}/>
+                <CourseCardItem course={course} key={index} refreshData={GetCourseList}/>
             ))
           : [1,2,3,4,5].map((item, index) => (
             <div key={index} className="h-56 w-full bg-slate-200 rounded-lg animated-pulse"></div>

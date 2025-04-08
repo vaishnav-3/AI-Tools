@@ -5,7 +5,7 @@ import {
   USER_TABLE,
 } from "../configs/schema";
 import { db } from "../configs/db";
-import { inngest } from "./client";
+import { inngest } from "./client"; 
 import {
   generateNotesAiModel,
   GenerateQaAiModel,
